@@ -20,3 +20,5 @@ doc/
 
 /config/twilio.yml
 /config/twilio.yml~
+/config/local_env.yml
+/config/local_env.yml~
