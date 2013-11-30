@@ -41,7 +41,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
-    bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
@@ -187,7 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt-ruby (= 3.0.1)
+  bcrypt-ruby (= 3.1.2)
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
