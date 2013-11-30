@@ -29,7 +29,7 @@ class MicropostsController < ApplicationController
             client.account.sms.messages.create(
             from: ENV['TWILIO_FROM'],
             to: thisNum,
-            body: "Testing text sending."
+            body: @micropost.content
             )
             #puts "Sent message to #{thisNum}"
             successlog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108']})
