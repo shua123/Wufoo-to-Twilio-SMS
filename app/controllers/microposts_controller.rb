@@ -8,11 +8,11 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
 
       # Instantiate a Twilio client
-      client = Twilio::REST::Client.new(TWILIO_CONFIG['sid'], TWILIO_CONFIG['token'])
+      client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
       
       # Create and send an SMS message
       client.account.sms.messages.create(
-        from: TWILIO_CONFIG['from'],
+        from: ENV['TWILIO_FROM'],
         to: '+18474776939',
         body: "Testing text sending."
       )
