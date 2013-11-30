@@ -2,7 +2,7 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field" >
-    <%= f.text_field :ipc %>
+  	<%= f.select :ipc, options_for_select([["Select One", ""], "Cell", "Work"]), :class => 'genForm_dropBox' %>
   </div>
   <div class="field" >
     <%= f.text_area :content, placeholder: "Compose new micropost..." %>
