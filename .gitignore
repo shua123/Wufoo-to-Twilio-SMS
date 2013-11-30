@@ -17,3 +17,6 @@ doc/
 .DS_Store
 .idea
 .secret
+
+/config/twilio.yml
+/config/twilio.yml~
