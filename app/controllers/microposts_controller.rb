@@ -31,11 +31,9 @@ class MicropostsController < ApplicationController
             to: thisNum,
             body: @micropost.content
             )
-            #puts "Sent message to #{thisNum}"
+
             successlog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108']})
-            #flash[:success] << "#{entry['EntryId']}   #{thisNum}"
-            #flash[:success] = "Sent Text Messages to EntryId: #{entry['EntryId']} Phone Number: #{thisNum}"
-            #flash[:notice] = "testing notice"
+
           rescue Twilio::REST::RequestError => e
             faillog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108'], :error_message => e.message})
             puts e.message
