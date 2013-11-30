@@ -21,7 +21,9 @@ class MicropostsController < ApplicationController
       
       entries.each do |entry|
 
-        if entry['Field110'] == "YES, we have permission to follow up by text." and entry['Field108'] != ''
+        if entry['Field110'] == "YES, we have permission to follow up by text." \
+                                and entry['Field108'] != ''\
+                                and entry['Field2'] == @micropost.ipc
           thisNum = "+1" + entry['Field108']
           #puts thisNum     
           begin
@@ -43,12 +45,16 @@ class MicropostsController < ApplicationController
       
       if successlog.count > 0
         successlist = successlog * ";     "
-        flash[:success] = "Sent Text Messages to:   #{successlist}"
+        flash[:success] = "Sent #{successlog.count} Text Messages to:   #{successlist}"
       end
       
       if faillog.count > 0
         faillist = faillog * ";     "
-        flash[:notice] = "Problem sending Text Messages to:   #{faillist}"
+        flash[:notice] = "Problem sending #{faillog.count} Text Messages to:   #{faillist}"
+      end
+
+      if successlog.count == 0 and faillog.count == 0
+        flash[:notice] = "No entries matched the criteria."
       end
       #flash[:notice] = "Sent Text Messages to EntryId: #{successlog[0][:entryid]} Phone Number: #{successlog[0][:number]}"
       redirect_to root_url
