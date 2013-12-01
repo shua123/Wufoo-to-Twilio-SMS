@@ -4,7 +4,7 @@
   	
   <div class="field" >
   	<%= f.select :ipc, options_for_select([["Select IPC", ""], "Abram (Ser)","America (BYNC)","Angela G. (QCDC)","Angela T. (St. Sab)","Anjelica (Safer)","Barb (JARC)","Carli (Chi Comm)","Cassandra Caldwell (MFS-Eng)","Claudia Cordero (CCL)","Deanna Woods (Team Eng)","Donnna (CCL)","Gail (NOW)","Guadalupe (TRP)","Gustavo (JARC)","Khayeem (GADC)","LaMar (Quad CWF)","Larry (LCDC)","Lorena (IDPL-BY)","Lubia (IDPL-Pil)","Maggie (SWOP)","Michelle (NLEN)","Mireya (GSDC)","Sabrina (CCL)","Teresa (Enlace)","Tracelli (GPC)","Wanda (MFS-Wood)"]) %>
-
+    <%= f.select :langpref, options_for_select([["All Languages","All"],["Prefers Spanish","Spanish"],["Does not prefer Spanish","None"]]) %>
     <%= f.text_area :content, placeholder: "Compose new text message..." %>
   </div>
   <span class="countdown"></span>

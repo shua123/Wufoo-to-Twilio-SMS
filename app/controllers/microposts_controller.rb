@@ -8,9 +8,18 @@ class MicropostsController < ApplicationController
       wufoo = WuParty.new(ENV['WUFOO_ACCOUNT'], ENV['WUFOO_KEY'])
       
       wuform = wufoo.form(ENV['WUFOO_FORMID'])
-      entries = wuform.entries(:filters => [['Field110', 'Contains', "YES"],\
-                                            ['Field108', 'Is_not_NULL'],\
-                                            ['Field2', 'Is_equal_to', @micropost.ipc]])
+      wuformFilters = [['Field110', 'Contains', "YES"],\
+                           ['Field108', 'Is_not_NULL'],\
+                          ['Field2', 'Is_equal_to', @micropost.ipc]]
+
+      if @micropost.langpref == "Spanish"
+        wuformFilters.push(['Field211', 'Contains', "Yes"])
+      elsif @micropost.langpref == "None"
+        wuformFilters.push(['Field211', 'Does_not_contain', "Yes"])
+      end
+
+      entries = wuform.entries(:filters => wuformFilters)
+
       entriesCount = entries.count
       # Instantiate a Twilio client
       client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
@@ -55,12 +64,12 @@ class MicropostsController < ApplicationController
 
       if successlog.count > 0
         successlist = successlog * ";     "
-        flash[:success] = "#{entriesCount}  Sent #{successlog.count} Text Messages to:   #{successlist}"
+        flash[:success] = "Sent #{successlog.count} Text Messages to:   #{successlist}"
       end
       
       if faillog.count > 0
         faillist = faillog * ";     "
-        flash[:notice] = "#{entriesCount}  Problem sending #{faillog.count} Text Messages to:   #{faillist}"
+        flash[:notice] = "Problem sending #{faillog.count} Text Messages to:   #{faillist}"
       end
 
       if successlog.count == 0 and faillog.count == 0
