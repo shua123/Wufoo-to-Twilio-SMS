@@ -1,6 +1,6 @@
 function updateCountdown() {
   // 140 characters max
-  var left = 140 - jQuery('#micropost_content').val().length;
+  var left = 160 - jQuery('#micropost_content').val().length;
   if(left == 1) {
     var charactersLeft = ' character left.'
   }

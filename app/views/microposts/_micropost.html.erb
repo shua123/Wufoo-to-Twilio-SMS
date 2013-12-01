@@ -1,13 +1,15 @@
 <li>
   <span class="ipc">IPC: <%= micropost.ipc %>  </span>
-  <span class="results">Total Sent: <%= micropost.successCount %>   Problems: <%= micropost.problemCount %>   Success IDs: <%= micropost.successIds %>   Problem IDs: <%= micropost.problemIds %> 
-  <span class="content"><%= micropost.content %></span>
+  <span class="successes">Total Sent: <%= micropost.successCount %>  Success IDs: <%= micropost.successIds %> </span>
+  <span class="problems">Problems: <%= micropost.problemCount %> Problem IDs: <%= micropost.problemIds %> </span>
+  
+  <span class="content">Message: <%= micropost.content %></span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    Sent at <%= micropost.created_at.strftime("%m/%d/%Y %r") %>.
   </span>
-  <% if current_user?(micropost.user) %>
-    <%= link_to "delete", micropost, method: :delete,
+  <%# if current_user?(micropost.user) %>
+    <%#= link_to "delete", micropost, method: :delete,
                                      data: { confirm: 'You sure?' },
                                      title: micropost.content %>
-  <% end %>
+  <%# end %>
 </li>
