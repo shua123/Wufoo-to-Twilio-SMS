@@ -8,9 +8,10 @@ class MicropostsController < ApplicationController
       wufoo = WuParty.new(ENV['WUFOO_ACCOUNT'], ENV['WUFOO_KEY'])
       
       wuform = wufoo.form(ENV['WUFOO_FORMID'])
-      entries = wuform.entries
-      #numbers = entries[0]['Field4']
-
+      entries = wuform.entries(:filters => [['Field110', 'Contains', "YES"],\
+                                            ['Field108', 'Is_not_NULL'],\
+                                            ['Field2', 'Is_equal_to', @micropost.ipc]])
+      entriesCount = entries.count
       # Instantiate a Twilio client
       client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
 
@@ -54,16 +55,16 @@ class MicropostsController < ApplicationController
 
       if successlog.count > 0
         successlist = successlog * ";     "
-        flash[:success] = "Sent #{successlog.count} Text Messages to:   #{successlist}"
+        flash[:success] = "#{entriesCount}  Sent #{successlog.count} Text Messages to:   #{successlist}"
       end
       
       if faillog.count > 0
         faillist = faillog * ";     "
-        flash[:notice] = "Problem sending #{faillog.count} Text Messages to:   #{faillist}"
+        flash[:notice] = "#{entriesCount}  Problem sending #{faillog.count} Text Messages to:   #{faillist}"
       end
 
       if successlog.count == 0 and faillog.count == 0
-        flash[:notice] = "No entries matched the criteria."
+        flash[:notice] = "No entries matched the criteria. #{entriesCount}"
       end
       #flash[:notice] = "Sent Text Messages to EntryId: #{successlog[0][:entryid]} Phone Number: #{successlog[0][:number]}"
       redirect_to root_url
