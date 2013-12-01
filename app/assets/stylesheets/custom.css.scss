@@ -230,9 +230,10 @@ input, select {
   }
 }
 
-.content {
+.content, .ipc, .successes, .problems {
   display: block;
 }
+
 
 .timestamp {
   color: $grayLight;

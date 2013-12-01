@@ -15,15 +15,16 @@ class MicropostsController < ApplicationController
       client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
 
       successlog = []
+      successlist = []
       faillog = []
-      #flash[:success] = "Sent Text Messages to: "
-
-      
+      faillist = []
       entries.each do |entry|
 
         if entry['Field110'] == "YES, we have permission to follow up by text." \
                                 and entry['Field108'] != ''\
                                 and entry['Field2'] == @micropost.ipc
+
+
           thisNum = "+1" + entry['Field108']
           #puts thisNum     
           begin
@@ -35,14 +36,22 @@ class MicropostsController < ApplicationController
             )
 
             successlog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108']})
-
+            successlist.push(entry['EntryId'])
           rescue Twilio::REST::RequestError => e
             faillog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108'], :error_message => e.message})
+            faillist.push(entry['EntryId'])
             puts e.message
           end
         end
       end
       
+
+      @micropost.update_attributes(:successCount => successlog.count)
+      @micropost.update_attributes(:problemCount => faillog.count)
+      @micropost.update_attributes(:successIds => successlist*", ")
+      @micropost.update_attributes(:problemIds => faillist*", ")
+
+
       if successlog.count > 0
         successlist = successlog * ";     "
         flash[:success] = "Sent #{successlog.count} Text Messages to:   #{successlist}"
@@ -72,7 +81,7 @@ class MicropostsController < ApplicationController
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :ipc)
+      params.require(:micropost).permit(:content, :ipc, :langpref)
     end
 
     def correct_user

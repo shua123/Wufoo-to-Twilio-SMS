@@ -3,9 +3,10 @@
   <%= render 'shared/error_messages', object: f.object %>
   	
   <div class="field" >
-  	<%= f.select :ipc, options_for_select([["Select One", ""], "Abram (Ser)","America (BYNC)","Angela G. (QCDC)","Angela T. (St. Sab)","Anjelica (Safer)","Barb (JARC)","Carli (Chi Comm)","Cassandra Caldwell (MFS-Eng)","Claudia Cordero (CCL)","Deanna Woods (Team Eng)","Donnna (CCL)","Gail (NOW)","Guadalupe (TRP)","Gustavo (JARC)","Khayeem (GADC)","LaMar (Quad CWF)","Larry (LCDC)","Lorena (IDPL-BY)","Lubia (IDPL-Pil)","Maggie (SWOP)","Michelle (NLEN)","Mireya (GSDC)","Sabrina (CCL)","Teresa (Enlace)","Tracelli (GPC)","Wanda (MFS-Wood)"]) %>
+  	<%= f.select :ipc, options_for_select([["Select IPC", ""], "Abram (Ser)","America (BYNC)","Angela G. (QCDC)","Angela T. (St. Sab)","Anjelica (Safer)","Barb (JARC)","Carli (Chi Comm)","Cassandra Caldwell (MFS-Eng)","Claudia Cordero (CCL)","Deanna Woods (Team Eng)","Donnna (CCL)","Gail (NOW)","Guadalupe (TRP)","Gustavo (JARC)","Khayeem (GADC)","LaMar (Quad CWF)","Larry (LCDC)","Lorena (IDPL-BY)","Lubia (IDPL-Pil)","Maggie (SWOP)","Michelle (NLEN)","Mireya (GSDC)","Sabrina (CCL)","Teresa (Enlace)","Tracelli (GPC)","Wanda (MFS-Wood)"]) %>
+
     <%= f.text_area :content, placeholder: "Compose new text message..." %>
   </div>
   <span class="countdown"></span>
-  <%= f.submit "Post", class: "btn btn-large btn-primary", data: { confirm: 'This message will be sent now. Are you sure?' } %>
+  <%= f.submit "Send Text Message", class: "btn btn-large btn-primary", data: { confirm: 'This message will be sent now. Are you sure?' } %>
 <% end %>
