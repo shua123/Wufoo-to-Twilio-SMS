@@ -5,6 +5,13 @@ GIT
     database_cleaner (1.2.0)
 
 GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: 44b0448193d4856847e47fb2a245bdd51a4bb2fa
+  specs:
+    jquery-datatables-rails (1.12.2)
+      jquery-rails
+
+GIT
   remote: git://github.com/sporkrb/spork-rails.git
   revision: 0dd45e59d3237b4c8f9efc215b46d9c07072a95e
   specs:
@@ -100,6 +107,8 @@ GEM
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.1.0)
+      railties (>= 3.1.0)
     json (1.8.1)
     json_pure (1.8.1)
     jwt (0.1.8)
@@ -224,7 +233,9 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.0)
   faker (= 1.1.2)
   jbuilder (= 1.0.2)
+  jquery-datatables-rails!
   jquery-rails (= 3.0.4)
+  jquery-ui-rails
   pg (= 0.15.1)
   rails (= 4.0.1)
   rails_12factor (= 0.0.2)
