@@ -5,11 +5,11 @@
   </span>
   <span class="ipc">IPC:  <%= feed_item.ipc %></span>
   <span class="langpref">Language Preference:  <%= feed_item.langpref %></span>
-  <span class="successes">Total Sent: <%= feed_item.successCount %>  Success IDs: <%= feed_item.successIds %> </span>
-  <span class="problems">Problems: <%= feed_item.problemCount %> Problem IDs: <%= feed_item.problemIds %> </span>
-  <span class="content">Message: <%= feed_item.content %></span>
+  <span class="successes">Total Sent: <%= feed_item.successCount %>  Problems: <%= feed_item.problemCount %>  </span>
+  <span class="content">Message: </span>
+  <span class="content" ><%= feed_item.content %></span>
   <span class="timestamp">
-    Sent at <%= feed_item.created_at.strftime("%m/%d/%Y %r") %>.
+    Scheduled at <%= feed_item.created_at.strftime("%m/%d/%Y %r") %>.
   </span>
   <%# if current_user?(feed_item.user) %>
     <%#= link_to "delete", feed_item, method: :delete,
