@@ -19,6 +19,8 @@ SampleApp40::Application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
 
   match '/jobs', to: 'microposts#jobs', via: 'get'
+  match '/messages/sent', to: 'microposts#messages_sent', via: 'get'
+  match '/messages/received', to: 'microposts#messages_received', via: 'get'
 
 
   # The priority is based upon order of creation:

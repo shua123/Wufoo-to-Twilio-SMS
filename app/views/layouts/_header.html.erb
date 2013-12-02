@@ -8,6 +8,8 @@
           <!--<li><%= link_to "Help", help_path %></li>-->
           <% if signed_in? %>
             <li><%= link_to "Jobs Submitted", jobs_path %></li>
+            <li><%= link_to "Messages Sent", messages_sent_path %></li>
+            <li><%= link_to "Messages Received", messages_received_path %></li>
             <li><%= link_to "Users", users_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
