@@ -28,19 +28,19 @@ class Micropost < ActiveRecord::Base
         wuformFilters.push(['Field211', 'Does_not_contain', "Yes"])
       end
 
-      limit = 5
+      limit = 100
       pagenum = 0
       subtotal = 0
       entries = []
       countAll = wuform.count(:sort => 'EntryId ASC', :limit => limit, :pageStart => pagenum, :filters => wuformFilters)
       countAll = countAll.to_i
-      #while subtotal < countAll do
+      while subtotal < countAll do
         entriesTemp = []
         entriesTemp = wuform.entries(:sort => 'EntryId ASC', :limit => limit, :pageStart => pagenum, :filters => wuformFilters)
         entries = entries | entriesTemp
         subtotal = entries.count
         pagenum = pagenum + limit
-      #end
+      end
 
       entriesCount = entries.count
       # Instantiate a Twilio client
