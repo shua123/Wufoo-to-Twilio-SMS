@@ -10,7 +10,7 @@ SampleApp40::Application.routes.draw do
 
   root to: 'static_pages#home'
 
-  #match '/signup',  to: 'users#new',            via: 'get'
+  match '/adduser',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
 
