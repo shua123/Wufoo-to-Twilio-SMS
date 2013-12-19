@@ -18,14 +18,14 @@ class Micropost < ActiveRecord::Base
       wufoo = WuParty.new(ENV['WUFOO_ACCOUNT'], ENV['WUFOO_KEY'])
       
       wuform = wufoo.form(ENV['WUFOO_FORMID'])
-      wuformFilters = [['Field110', 'Contains', "YES"],\
-                           ['Field108', 'Is_not_NULL'],\
-                          ['Field2', 'Is_equal_to', self.ipc]]
+      wuformFilters = [[ENV['WUFIELD_SMSPERMS'], 'Contains', "YES"],\
+                           [ENV['WUFIELD_PHNUM'], 'Is_not_NULL'],\
+                          [ENV['WUFIELD_IPC'], 'Is_equal_to', self.ipc]]
 
       if self.langpref == "Spanish"
-        wuformFilters.push(['Field211', 'Contains', "Yes"])
+        wuformFilters.push([ENV['WUFIELD_SPANISH'], 'Contains', "Yes"])
       elsif self.langpref == "None"
-        wuformFilters.push(['Field211', 'Does_not_contain', "Yes"])
+        wuformFilters.push([ENV['WUFIELD_SPANISH'], 'Does_not_contain', "Yes"])
       end
 
       limit = 100
@@ -52,12 +52,12 @@ class Micropost < ActiveRecord::Base
       faillist = []
       entries.each do |entry|
 
-        if entry['Field110'] == "YES, we have permission to follow up by text." \
-                                and entry['Field108'] != ''\
-                                and entry['Field2'] == self.ipc
+        if entry[ENV['WUFIELD_SMSPERMS']] == "YES, we have permission to follow up by text." \
+                                and entry[ENV['WUFIELD_PHNUM']] != ''\
+                                and entry[ENV['WUFIELD_IPC']] == self.ipc
 
 
-          thisNum = "+1" + entry['Field108']
+          thisNum = "+1" + entry[ENV['WUFIELD_PHNUM']]
           #puts thisNum     
           begin
             # Create and send an SMS message
@@ -67,10 +67,10 @@ class Micropost < ActiveRecord::Base
             body: self.content
             )
 
-            successlog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108']})
+            successlog.push({:entryid => entry['EntryId'], :phone_number => entry[ENV['WUFIELD_PHNUM']]})
             successlist.push(entry['EntryId'])
           rescue Twilio::REST::RequestError => e
-            faillog.push({:entryid => entry['EntryId'], :phone_number => entry['Field108'], :error_message => e.message})
+            faillog.push({:entryid => entry['EntryId'], :phone_number => entry[ENV['WUFIELD_PHNUM']], :error_message => e.message})
             faillist.push(entry['EntryId'])
             puts e.message
           end

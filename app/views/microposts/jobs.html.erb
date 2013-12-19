@@ -41,7 +41,9 @@
   </table>
 <script>
   $(document).ready(function() {
-    $('#microposts').dataTable();
+    $('#microposts').dataTable({
+        "aaSorting": [[ 8, "desc" ]]
+    } );
   } );
 
 </script>
