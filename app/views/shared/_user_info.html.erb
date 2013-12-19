@@ -1,6 +1,9 @@
 <h1><a href="<%= user_path(current_user) %>">
   <%= current_user.name %></a>
 </h1>
-<span>
-  <%= pluralize(current_user.microposts.count, "text message") %>
-</span>
+<div class="row">
+  <div class="span3">
+    Wufoo Account: <%= ENV['WUFOO_ACCOUNT'] %> </div>
+   <div class="span3">Phone Number: <%= ENV['TWILIO_FROM'] %></div>
+   <div class="span3"> <%= pluralize(current_user.microposts.count, "text message") %></div>
+</div>
