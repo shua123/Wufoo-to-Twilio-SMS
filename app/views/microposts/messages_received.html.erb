@@ -45,7 +45,9 @@
   </table>
   <script>
   $(document).ready(function() {
-    $('#messages-received').dataTable();
+    $('#messages-received').dataTable({
+        "aaSorting": [[ 3, "desc" ]]
+    });
   } );
 
 </script>
