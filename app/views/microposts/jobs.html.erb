@@ -1,6 +1,14 @@
 <% if signed_in? %>
+
+<div class='span12'>
+<div class='span3'>Total Jobs Submitted: <%= Micropost.count %></div>
+<div class='span4'>Total Messages Successfully Sent: <%= Micropost.sum('successCount') %></div>
+<div class='span4'>Total Messages Failed: <%= Micropost.sum('problemCount') %></div>
+</div>
+
 <table class="table table-bordered table-hover table-condensed" id="microposts" >  
  <!--  <table class="display" id="microposts" > -->
+    
     <thead>
       <tr>
                         <td>ID</td>
@@ -39,10 +47,12 @@
       <% end %>
     </tbody>
   </table>
+
 <script>
   $(document).ready(function() {
     $('#microposts').dataTable({
-        "aaSorting": [[ 8, "desc" ]]
+        "aaSorting": [[ 8, "desc" ]],
+        "bDestroy": true
     } );
   } );
 
