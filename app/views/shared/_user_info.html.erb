@@ -5,5 +5,5 @@
    <div class="span3">Wufoo Account: <%= ENV['WUFOO_ACCOUNT'] %></div>
    <div class="span3">Phone Number: <%= ENV['TWILIO_FROM'] %></div>
    <div class="span4">Form: <%= ENV['WUFOO_FORMID'] %></div>
-   <div class="span2"> <%= pluralize(current_user.microposts.count, "text message") %></div>
+   <div class="span2"> <%= current_user.microposts.count %> jobs submitted</div>
 </div>
