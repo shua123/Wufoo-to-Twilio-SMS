@@ -19,7 +19,7 @@
         <td>Sent IDs</td>
         <td>Problem IDs</td>
         <td>Submitted</td>
-        <td>Finished</td>
+        <td>Updated</td>
         <td>Error Message</td>
       </tr>
     </thead>
@@ -57,7 +57,9 @@
     $('#microposts').dataTable({
         "aaSorting": [[ 10, "desc" ]],
         "iDisplayLength": 50,
-        "bDestroy": true
+        "bDestroy": true,
+        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap"
     } );
   } );
 

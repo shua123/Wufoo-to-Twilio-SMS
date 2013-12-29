@@ -2,6 +2,11 @@
 
 /* mixins, variables, etc. */
 
+
+td {
+  font-size: 11px;
+}
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
