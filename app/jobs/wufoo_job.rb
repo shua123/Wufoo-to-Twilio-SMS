@@ -64,13 +64,12 @@ class WufooJob < Struct.new(:micropost)
         end
       end
     end
-    idString = successlist.join(", ")
-    micropost.update_attributes(:successIds => idString)
-    idString = faillist.join(", ")
-    micropost.update_attributes(:problemIds => idString)
+    # idString = successlist.join(", ")
+    # micropost.update_attributes(:successIds => idString)
+    # idString = faillist.join(", ")
+    # micropost.update_attributes(:problemIds => idString)
     micropost.update_attributes(:successCount => successlist.count)
     micropost.update_attributes(:problemCount => faillist.count)
-    
   end
 
   def before(job)
