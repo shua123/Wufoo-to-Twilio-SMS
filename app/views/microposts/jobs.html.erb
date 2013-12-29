@@ -7,42 +7,46 @@
 </div>
 
 <table class="table table-bordered table-hover table-condensed" id="microposts" >  
- <!--  <table class="display" id="microposts" > -->
-    
     <thead>
       <tr>
-                        <td>ID</td>
-                        <td>IPC</td>
-                        <td>LangPref</td>
-                        <td>Message</td>
-                        <td># Sent</td>
-                        <td># Problems</td>
-                        <td>Sent IDs</td>
-                        <td>Problem IDs</td>
-                        
-                        <td>Submitted</td>
-                        <td>Finished</td>
-                </tr>
-
+        <td>ID</td>
+        <td>Status</td>
+        <td>IPC</td>
+        <td>LangPref</td>
+        <td>Message</td>
+        <td># Sent</td>
+        <td># Problems</td>
+        <td>Sent IDs</td>
+        <td>Problem IDs</td>
+        <td>Submitted</td>
+        <td>Finished</td>
+        <td>Error Message</td>
+      </tr>
     </thead>
-
     <tbody>   
 
       <% Micropost.all.each do |thismicropost| %>
-        <tr>                                     
-
-              <td><%= thismicropost[:id] %></td>  
+        <% if thismicropost[:status] == "Successful" %>
+          <tr class="success"> 
+        <% elsif thismicropost[:status] == "Error" %> 
+          <tr class="error">
+        <% elsif thismicropost[:status] == "Failed" %> 
+          <tr class="warning">
+        <% else %>
+          <tr>
+        <% end %>                                  
+              <td><%= thismicropost[:id] %></td>
+              <td><%= thismicropost[:status] %></td>  
               <td><%= thismicropost[:ipc] %></td>            
               <td><%= thismicropost[:langpref] %></td> 
               <td><%= thismicropost[:content] %></td>  
               <td><%= thismicropost[:successCount] %></td>              
               <td><%= thismicropost[:problemCount] %></td>              
               <td><%= thismicropost[:successIds] %></td>              
-              <td><%= thismicropost[:problemIds] %></td>              
-                          
+              <td><%= thismicropost[:problemIds] %></td>                      
               <td><%= thismicropost[:created_at].strftime("%m/%d/%Y %r") %></td>              
-              <td><%= thismicropost[:updated_at].strftime("%m/%d/%Y %r") %></td>              
-
+              <td><%= thismicropost[:updated_at].strftime("%m/%d/%Y %r") %></td>  
+              <td><%= thismicropost[:error_msg] %></td> 
         </tr>
       <% end %>
     </tbody>
@@ -51,7 +55,8 @@
 <script>
   $(document).ready(function() {
     $('#microposts').dataTable({
-        "aaSorting": [[ 8, "desc" ]],
+        "aaSorting": [[ 10, "desc" ]],
+        "iDisplayLength": 50,
         "bDestroy": true
     } );
   } );

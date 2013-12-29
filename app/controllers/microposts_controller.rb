@@ -5,13 +5,15 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      myresult = @micropost.send_text
-      flash[:success] = "Scheduled job with IPC: #{@micropost.ipc}...\
+      #myresult = @micropost.send_text
+      Delayed::Job.enqueue WufooJob.new(@micropost)
+      flash[:success] = "Scheduled job #{@micropost.id} with IPC: #{@micropost.ipc}...\
                         Language: #{@micropost.langpref}...\
                         Message: #{@micropost.content}...\
-                        Created At: #{myresult[:created_at].strftime("%m/%d/%Y %r")}...\
-                        Run At: #{myresult[:run_at].strftime("%m/%d/%Y %r")}...\
-                        Updated At: #{myresult[:updated_at].strftime("%m/%d/%Y %r")}"
+                        Status: #{@micropost.status}"
+                        # Created At: #{myresult[:created_at].strftime("%m/%d/%Y %r")}...\
+                        # Run At: #{myresult[:run_at].strftime("%m/%d/%Y %r")}...\
+                        # Updated At: #{myresult[:updated_at].strftime("%m/%d/%Y %r")}"
 
     #   "priority",   default: 0, null: false
     # t.integer  "attempts",   default: 0, null: false

@@ -1,6 +1,6 @@
 <% if signed_in? %>
 <% @twiliomessages = messagesSent() %>
-<h1>Messages Sent (Last 150)</h1>
+<h1>Messages Sent (Last 1000)</h1>
 <table class="table table-bordered table-hover table-condensed" id="messages-sent" >  
  <!--  <table class="display" id="messagessent" > -->
     <thead>
@@ -46,7 +46,8 @@
   <script>
   $(document).ready(function() {
     $('#messages-sent').dataTable({
-        "aaSorting": [[ 3, "desc" ]]
+        "aaSorting": [[ 3, "desc" ]],
+        "iDisplayLength": 50
     });
   } );
 
