@@ -14,7 +14,7 @@ module MicropostsHelper
     begin
         client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN']) 
         listreceived = client.account.messages.list({:to => ENV['TWILIO_FROM'], :page_size => 400})
-    rescue
+    rescue => error
         flash[:error] =  "There was a problem loading received messages from Twilio. Error message: #{error.message}"   
         list = []
     end
