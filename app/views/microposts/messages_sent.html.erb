@@ -1,25 +1,18 @@
 <% if signed_in? %>
 <% @twiliomessages = messagesSent() %>
-<h1>Messages Sent (Last 1000)</h1>
+<h1>Messages Sent (Last 200)</h1>
 <table class="table table-bordered table-hover table-condensed" id="messages-sent" >  
  <!--  <table class="display" id="messagessent" > -->
     <thead>
       <tr>
-                        <td>SID</td>
-                        <td>Date Created</td>
-                        <td>Date Updated</td>
-                        <td>Date Sent</td>
-
-                        <td>To</td>
-                        <td>Message</td>
-                        <td>Status</td>
-<!--                         <td>Direction</td>
-                        <td>Sent IDs</td>
-                        <td>Problem IDs</td>
-                        
-                        <td>Submitted</td>
-                        <td>Finished</td> -->
-                </tr>
+        <td>SID</td>
+        <td>Date Created</td>
+        <td>Date Updated</td>
+        <td>Date Sent</td>
+        <td>To</td>
+        <td>Message</td>
+        <td>Status</td>
+      </tr>
 
     </thead>
 
@@ -32,12 +25,9 @@
               <td><%= thismessage.date_created %></td> 
               <td><%= thismessage.date_updated %></td> 
               <td><%= thismessage.date_sent %></td> 
-
               <td><%= thismessage.to %></td> 
               <td><%= thismessage.body %></td> 
               <td><%= thismessage.status %></td> 
-
-
 
         </tr>
       <% end %>
