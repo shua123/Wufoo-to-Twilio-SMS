@@ -38,9 +38,7 @@ class WufooJob < Struct.new(:micropost)
     # Instantiate a Twilio client
     client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
 
-    successlog = []
     successlist = []
-    faillog = []
     faillist = []
     entries.each do |entry|
 
@@ -59,17 +57,15 @@ class WufooJob < Struct.new(:micropost)
           body: micropost.content
           )
 
-          successlog.push({:entryid => entry['EntryId'], :phone_number => entry[ENV['WUFIELD_PHNUM']]})
           successlist.push(entry['EntryId'])
         rescue Twilio::REST::RequestError => e
-          faillog.push({:entryid => entry['EntryId'], :phone_number => entry[ENV['WUFIELD_PHNUM']], :error_message => e.message})
           faillist.push(entry['EntryId'])
           puts e.message
         end
       end
     end
-    micropost.update_attributes(:successCount => successlog.count)
-    micropost.update_attributes(:problemCount => faillog.count)
+    micropost.update_attributes(:successCount => successlist.count)
+    micropost.update_attributes(:problemCount => faillist.count)
     micropost.update_attributes(:successIds => successlist*", ")
     micropost.update_attributes(:problemIds => faillist*", ")
   end
