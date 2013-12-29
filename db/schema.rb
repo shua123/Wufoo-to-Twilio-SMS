@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229054051) do
+ActiveRecord::Schema.define(version: 20131229090652) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 20131229054051) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ipc"
-    t.string   "langpref",     default: "None"
+    t.string   "langpref",                 default: "None"
     t.integer  "successCount"
     t.integer  "problemCount"
-    t.string   "successIds"
-    t.string   "problemIds"
+    t.text     "successIds",   limit: 255
+    t.text     "problemIds",   limit: 255
     t.string   "status"
     t.string   "error_msg"
   end

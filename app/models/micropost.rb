@@ -1,6 +1,9 @@
 class Micropost < ActiveRecord::Base
   belongs_to :user
 
+  serialize :successIds
+  serialize :problemIds
+
   validates :user_id, presence: true
   validates :ipc, presence: true
   validates :content, presence: true, length: { maximum: 160 }
