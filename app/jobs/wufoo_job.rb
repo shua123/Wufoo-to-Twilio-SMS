@@ -64,10 +64,11 @@ class WufooJob < Struct.new(:micropost)
         end
       end
     end
+    micropost.update_attributes(:successIds => successlist*", ")
+    micropost.update_attributes(:problemIds => faillist*", ")
     micropost.update_attributes(:successCount => successlist.count)
     micropost.update_attributes(:problemCount => faillist.count)
-    #micropost.update_attributes(:successIds => successlist*", ")
-    #micropost.update_attributes(:problemIds => faillist*", ")
+    
   end
 
   def before(job)
