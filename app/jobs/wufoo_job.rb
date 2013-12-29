@@ -33,14 +33,16 @@ class WufooJob < Struct.new(:micropost)
       pagenum = pagenum + limit
     end
 
-    entriesCount = entries.count
+    entriesUniq = entries.uniq { |entry| entry[ENV['WUFIELD_PHNUM']] }
+
+    entriesCount = entriesUniq.count
 
     # Instantiate a Twilio client
     client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
 
     successlist = []
     faillist = []
-    entries.each do |entry|
+    entriesUniq.each do |entry|
 
       if entry[ENV['WUFIELD_SMSPERMS']] == "YES, we have permission to follow up by text." \
                               and entry[ENV['WUFIELD_PHNUM']] != ''\
