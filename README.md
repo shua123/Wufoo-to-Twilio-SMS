@@ -1,15 +1,13 @@
-# Ruby on Rails Tutorial: sample application
+# Wufoo to Twilio Text Message App
 
-This is the sample application for
-[*Ruby on Rails Tutorial: Learn Web Development with Rails*](http://railstutorial.org/)
-by [Michael Hartl](http://michaelhartl.com/). You can use this reference implementation to help track down errors if you end up having trouble with code in the tutorial. In particular, as a first debugging check I suggest getting the test suite to pass on your local machine:
+This app connects to a Wufoo form to gather phone number entries, then sends text messages through Twilio.
 
-    $ cd /tmp
-    $ git clone git@github.com:railstutorial/sample_app_2nd_ed.git
-    $ cd sample_app_2nd_ed
-    $ bundle install
-    $ bundle exec rake db:migrate
-    $ bundle exec rake db:test:prepare
-    $ bundle exec rspec spec/
+1) Clone repository
+2) Change environment variables for Twilio and Wufoo API keys. 
+3) Application start: "Foreman start"
+4) Deploy to Heroku
 
-If the tests don't pass, it means there may be something wrong with your system. If they do pass, then you can debug your code by comparing it with the reference implementation.
+On Heroku, a worker process is required to run. (heroku ps:scale worker=1)
+
+Wufoo field numbers stored as environmental variables.
+
