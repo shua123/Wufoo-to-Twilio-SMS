@@ -2,7 +2,7 @@
 
 This app connects to a Wufoo form to gather phone number entries, then sends text messages through Twilio. 
 
-Uses Rails, Postgres, Wufoo API, Twilio API
+Uses Ruby 2.0, Rails 4, Postgres, Wufoo API, Twilio API
 
 * Clone repository
 * Change environment variables for Twilio and Wufoo API keys. 
